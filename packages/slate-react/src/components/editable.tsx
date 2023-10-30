@@ -4,6 +4,7 @@ import throttle from 'lodash/throttle'
 import React, {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useReducer,
   useRef,
@@ -172,6 +173,19 @@ export const Editable = (props: EditableProps) => {
     }),
     []
   )
+
+  useLayoutEffect(() => {
+    return () => {
+      if (state == null) {
+        return
+      }
+      if (state.latestElement == null) {
+        return
+      }
+      state.latestElement.remove();
+      state.latestElement = null;
+    }
+  })
 
   // The autoFocus TextareaHTMLAttribute doesn't do anything on a div, so it
   // needs to be manually focused.
