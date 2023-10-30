@@ -185,7 +185,7 @@ export const Editable = (props: EditableProps) => {
       state.latestElement.remove();
       state.latestElement = null;
     }
-  })
+  },[])
 
   // The autoFocus TextareaHTMLAttribute doesn't do anything on a div, so it
   // needs to be manually focused.
